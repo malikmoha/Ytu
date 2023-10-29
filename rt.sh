@@ -16,7 +16,8 @@ function goto
 : ngrok
 clear
 echo "Go to: https://dashboard.ngrok.com/get-started/your-authtoken"
-./ngrok authtoken 2UdNqe6bzuphgdfY1jJ1uNYN4WW_46UzwraUKcuMR7B57k4CR
+read -p "Paste Ngrok Authtoken: " CRP = "2UdNqe6bzuphgdfY1jJ1uNYN4WW_46UzwraUKcuMR7B57k4CR"
+./ngrok authtoken $CRP 
 
 clear
 echo "Repo: https://github.com/kmille36/Docker-Ubuntu-Desktop-NoMachine"
@@ -30,7 +31,8 @@ echo "au - Australia (Sydney)"
 echo "sa - South America (Sao Paulo)"
 echo "jp - Japan (Tokyo)"
 echo "in - India (Mumbai)"
-./ngrok tcp --region us 4000 &>/dev/null &
+read -p "choose ngrok region: " CRP = "us"
+./ngrok tcp --region $CRP 4000 &>/dev/null &
 sleep 1
 if curl --silent --show-error http://127.0.0.1:4040/api/tunnels  > /dev/null 2>&1; then echo OK; else echo "Ngrok Error! Please try again!" && sleep 1 && goto ngrok; fi
 docker run --rm -d --network host --privileged --name nomachine-xfce4 -e PASSWORD=123456 -e USER=user --cap-add=SYS_PTRACE --shm-size=1g thuonghai2711/nomachine-ubuntu-desktop:xfce4
@@ -42,4 +44,4 @@ curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*publ
 echo User: user
 echo Passwd: 123456
 echo "VM can't connect? Restart Cloud Shell then Re-run script."
-seq 1 43200 | while read i; do echo -en "\r Running .     $i s /43200 s";sleep 0.1;echo -en "\r Running ..    $i s /43200 s";sleep 0.1;echo -en "\r Running ...   $i s /43200 s";sleep 0.1;echo -en "\r Running ....  $i s /43200 s";sleep 0.1;echo -en "\r Running ..... $i s /43200 s";sleep 0.1;echo -en "\r Running     . $i s /43200 s";sleep 0.1;echo -en "\r Running  .... $i s /43200 s";sleep 0.1;echo -en "\r Running   ... $i s /43200 s";sleep 0.1;echo -en "\r Running    .. $i s /43200 s";sleep 0.1;echo -en "\r Running     . $i s /43200 s";sleep 0.1; don
+seq 1 43200 | while read i; do echo -en "\r Running .     $i s /43200 s";sleep 0.1;echo -en "\r Running ..    $i s /43200 s";sleep 0.1;echo -en "\r Running ...   $i s /43200 s";sleep 0.1;echo -en "\r Running ....  $i s /43200 s";sleep 0.1;echo -en "\r Running ..... $i s /43200 s";sleep 0.1;echo -en "\r Running     . $i s /43200 s";sleep 0.1;echo -en "\r Running  .... $i s /43200 s";sleep 0.1;echo -en "\r Running   ... $i s /43200 s";sleep 0.1;echo -en "\r Running    .. $i s /43200 s";sleep 0.1;echo -en "\r Running     . $i s /43200 s";sleep 0.1; done
